@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Last Chance - Financial Fuad</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Arial', sans-serif;
+            background: #000000;
+            color: #ffffff;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffd700;
+            letter-spacing: 1px;
+        }
+
+        .online-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #1a1a1a;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #333;
+        }
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="%23333" opacity="0.1"/><circle cx="75" cy="75" r="0.5" fill="%23333" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #ffd700, #ffffff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: #cccccc;
+            font-weight: 400;
+        }
+
+        .continue-btn {
+            background: #ffd700;
+            color: #000000;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 6px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glow 2s infinite alternate;
+        }
+
+        .continue-btn:hover {
+            background: #ffed4a;
+            transform: translateY(-3px);
+        }
+
+        /* Story Section */
+        .story-section {
+            background: #000000;
+            padding: 100px 0;
+        }
+
+        .story-content {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .story-content p {
+            margin-bottom: 40px;
+        }
+
+        .highlight {
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        .pain-point {
+            color: #ff4444;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .pleasure-point {
+            color: #00ff88;
+            font-weight: 600;
+        }
+
+        .urgency-text {
+            background: linear-gradient(45deg, #ff4444, #ffd700);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 40px 0;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .quote-box {
+            background: #1a1a1a;
+            border-left: 4px solid #ffd700;
+            padding: 30px;
+            margin: 40px 0;
+            font-style: italic;
+            font-size: 1.2rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .reveal-section {
+            background: #111111;
+            padding: 80px 0;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+
+        .reveal-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ffd700;
+        }
+
+        .reveal-text {
+            font-size: 1.4rem;
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 50px;
+        }
+
+        .cta-final {
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            color: #000000;
+            padding: 25px 60px;
+            border: none;
+            border-radius: 8px;
+            font-size: 24px;
+            font-weight: 900;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin: 50px auto;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            max-width: 500px;
+            animation: pulse-cta 3s infinite;
+        }
+
+        .cta-final:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.5);
+        }
+
+        .scarcity-timer {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: #ff4444;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-align: center;
+            z-index: 1000;
+            font-weight: 700;
+            animation: shake 1s infinite;
+        }
+
+        .warning-banner {
+            background: linear-gradient(45deg, #ff4444, #cc0000);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-weight: 700;
+            animation: blink 2s infinite;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+            to { box-shadow: 0 0 30px rgba(255, 215, 0, 0.7), 0 0 40px rgba(255, 215, 0, 0.4); }
+        }
+
+        @keyframes pulse-cta {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            75% { transform: translateX(3px); }
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .story-content { font-size: 1.1rem; }
+            .scarcity-timer { position: relative; top: auto; right: auto; margin: 20px auto; }
+            .cta-final { font-size: 18px; padding: 20px 40px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="warning-banner">
+        ⚠️ This page will only be available for the next 24 hours ⚠️
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">FINANCIAL FUAD</div>
+            <div class="online-indicator">
+                <span class="online-dot"></span>
+                <span id="onlineCount">2,847</span> reading this now
+            </div>
+        </nav>
+    </header>
+
+    <div class="scarcity-timer">
+        <div>⏰ PAGE EXPIRES IN:</div>
+        <div id="timer" style="font-size: 1.2rem;">23:47:30</div>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>You're About To Discover Something</h1>
+                    <p class="subtitle">That will change your financial situation forever... if you're ready to listen.</p>
+                    <button class="continue-btn" onclick="startReading()">Continue Reading →</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="story-section" id="story" style="display: none;">
+            <div class="container">
+                <div class="story-content">
+                    <p>Listen to me very carefully...</p>
+
+                    <p>Right now, as you're reading this, there are <span class="highlight">2,847 people</span> on this exact page with you. But here's what most of them won't do...</p>
+
+                    <p>They'll read this message, <span class="pain-point">feel that familiar pang of hope</span>, maybe even get excited for a few minutes... then they'll close this page and go back to their same broke routine.</p>
+
+                    <p><span class="pain-point">Scrolling through social media, watching other people live the life they want, complaining about money problems, making excuses about why "it's not the right time."</span></p>
+
+                    <div class="quote-box">
+                        "And whoever relies upon Allah - then He is sufficient for him. Indeed, Allah will accomplish His purpose." - Quran 65:3
+                    </div>
+
+                    <p>But you... you're different. I can tell because you're still reading. <span class="highlight">You're tired of being broke in a halal way, aren't you?</span></p>
+
+                    <p>You've probably tried everything:</p>
+                    <p>• Bought courses that promised quick money but delivered nothing<br>
+                    • Started businesses that failed because you didn't have the right knowledge<br>
+                    • Watched your friends and colleagues make progress while you stayed stuck<br>
+                    • <span class="pain-point">Felt that crushing disappointment when another "opportunity" turned out to be fake</span></p>
+
+                    <div class="urgency-text">
+                        The brutal truth? While you've been hesitating and "researching," 1,247 Muslims have already used these exact methods to build their halal income streams this month alone.
+                    </div>
+
+                    <p>My name is <span class="highlight">Financial Fuad</span>, and I'm about to share something with you that I've never shared publicly before...</p>
+
+                    <p>Three years ago, I was exactly where you are right now. <span class="pain-point">Broke, frustrated, watching everyone else succeed while I struggled to pay basic bills.</span></p>
+
+                    <p>I had bought every course, joined every program, followed every "guru." Nothing worked. I was ready to give up on ever making money online.</p>
+
+                    <p>Then something happened that changed everything...</p>
+
+                    <p>I discovered that <span class="highlight">99% of online income methods violate Islamic principles</span> in ways most Muslims don't even realize. The interest-based systems, the deceptive marketing, the gambling-like approaches...</p>
+
+                    <p>That's when I made a decision that would change my life forever:</p>
+
+                    <p><span class="pleasure-point">I would create a system of income generation that was 100% halal, 100% honest, and 100% effective.</span></p>
+
+                    <p>It took me 18 months of testing, failing, adjusting, and refining. I spent ₦847,000 of my own money figuring out what works and what doesn't.</p>
+
+                    <p>But when I finally cracked the code...</p>
+
+                    <p><span class="pleasure-point">In my first month, I made ₦127,000 using completely halal methods. By month six, I was earning ₦480,000 monthly. By the end of year one, I had built multiple income streams generating over ₦850,000 per month.</span></p>
+
+                    <div class="quote-box">
+                        "And it is He who created the heavens and earth in truth. And the day He says, 'Be,' and it is, His word is the truth." - Quran 6:73
+                    </div>
+
+                    <p>All while maintaining complete adherence to Islamic principles:</p>
+                    <p>• No interest (riba)<br>
+                    • No gambling or speculation<br>
+                    • No deception or false promises<br>
+                    • No selling haram products or services<br>
+                    • <span class="highlight">Just honest, beneficial work that serves others and earns Allah's blessing</span></p>
+
+                    <p>Here's what I realized: <span class="highlight">The reason most Muslims fail at making money online isn't lack of opportunity... it's lack of the RIGHT opportunity.</span></p>
+
+                    <p>You need methods that work WITH your faith, not against it.</p>
+
+                    <p><span class="pain-point">And right now, while you're reading this, another month is passing by. Another month where you could have been building your halal income streams.</span></p>
+
+                    <p>How many more months are you going to let slip by?</p>
+
+                    <p>How many more times are you going to tell yourself <span class="pain-point">"I'll start next month" or "I need to save up more money first" or "I need to research more"?</span></p>
+
+                    <div class="urgency-text">
+                        Listen carefully: The difference between people who succeed and people who stay broke isn't talent, luck, or connections. It's DECISION and ACTION.
+                    </div>
+
+                    <p>The successful ones make a decision and take action immediately. The broke ones think about it, analyze it, discuss it with friends, and then... do nothing.</p>
+
+                    <p><span class="highlight">Which one are you going to be?</span></p>
+
+                    <p>Because right now, I'm offering you something that I've never offered before and may never offer again...</p>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal-section">
+            <div class="container">
+                <h2 class="reveal-title">THE HALAL INCOME VAULT</h2>
+                <p class="reveal-text">
+                    26 complete, step-by-step, Shariah-compliant income methods that you can start implementing today.
+                </p>
+                <p class="reveal-text">
+                    <span class="pleasure-point">Every method has been tested, proven, and verified by Islamic scholars to be 100% halal.</span>
+                </p>
+                <p class="reveal-text">
+                    These aren't just courses. They're your pathway to financial freedom without compromising your faith.
+                </p>
+                
+                <div style="text-align: center; margin: 60px 0;">
+                    <p style="font-size: 1.2rem; color: #cccccc; margin-bottom: 20px;">But here's the thing...</p>
+                    <p style="font-size: 1.4rem; color: #ff4444; font-weight: 700; margin-bottom: 30px;">This offer expires in less than 24 hours.</p>
+                    <p style="font-size: 1.1rem; color: #999999; margin-bottom: 40px;">
+                        After that, these courses go back to full price and the special bundle disappears forever.
+                    </p>
+                </div>
+
+                <a href="#courses-page" class="cta-final" onclick="goToCourses()">
+                    SHOW ME THE COURSES NOW →
+                </a>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <p style="color: #666666; font-size: 0.9rem;">
+                        You have two choices: Take action now, or watch this opportunity disappear forever.
+                    </p>
+                    <p style="color: #ffd700; font-size: 1.1rem; font-weight: 700; margin-top: 15px;">
+                        What will you choose?
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let hasStartedReading = false;
+        let readingProgress = 0;
+
+        function startReading() {
+            if (!hasStartedReading) {
+                document.getElementById('story').style.display = 'block';
+                document.getElementById('story').scrollIntoView({ behavior: 'smooth' });
+                hasStartedReading = true;
+                
+                // Track reading progress
+                trackProgress();
+            }
+        }
+
+        function trackProgress() {
+            window.addEventListener('scroll', () => {
+                const story = document.getElementById('story');
+                const rect = story.getBoundingClientRect();
+                const visible = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                if (visible) {
+                    readingProgress = Math.min(readingProgress + 1, 100);
+                }
+            });
+        }
+
+        function goToCourses() {
+            // Navigate to the courses page
+            window.open('https://fuadayantayo.github.io/financial-fuad.github.io/', '_blank');
+        }
+
+        // Countdown timer
+        function startTimer() {
+            let hours = 23;
+            let minutes = 47;
+            let seconds = 30;
+            
+            setInterval(() => {
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                    if (minutes < 0) {
+                        minutes = 59;
+                        hours--;
+                        if (hours < 0) {
+                            hours = 23;
+                            minutes = 59;
+                            seconds = 59;
+                        }
+                    }
+                }
+                
+                const timerElement = document.getElementById('timer');
+                if (timerElement) {
+                    timerElement.textContent = 
+                        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+        }
+
+        // Update online count
+        function updateOnlineCount() {
+            const onlineElement = document.getElementById('onlineCount');
+            if (onlineElement) {
+                const baseCount = 2847;
+                const variation = Math.floor(Math.random() * 50) - 25;
+                onlineElement.textContent = (baseCount + variation).toLocaleString();
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', function() {
+            startTimer();
+            setInterval(updateOnlineCount, 15000);
+            
+            // Auto-scroll to story after 3 seconds if user hasn't clicked
+            setTimeout(() => {
+                if (!hasStartedReading) {
+                    startReading();
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
